@@ -1,6 +1,6 @@
 package org.in.vehicle.controller;
 
-import org.in.vehicle.model.CarAddRequest;
+import org.in.vehicle.model.CarDetails;
 import org.in.vehicle.service.VehicleService;
 import org.in.vehicle.service.exceptions.InvalidRequestException;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class VehicleDataController {
     }
 
     @PostMapping("/cars")
-    public ResponseEntity<?> addCar(@RequestBody CarAddRequest request){
+    public ResponseEntity<?> addCar(@RequestBody CarDetails request){
     	 try {
              return ResponseEntity.status(HttpStatus.OK).body(vehicleService.saveCarDetails(request));
          }catch (Exception e){
@@ -43,9 +43,9 @@ public class VehicleDataController {
     
     @PutMapping("/cars/{vehicleId}")
     public ResponseEntity<?> updateCarDetails(@PathVariable("vehicleId")Integer vehicleId,
-                                              @RequestBody CarAddRequest request){
+                                              @RequestBody CarDetails request){
         try {
-            CarAddRequest carAddRequest = vehicleService.getCarDetailsById(vehicleId);
+            CarDetails carAddRequest = vehicleService.getCarDetailsById(vehicleId);
             request.setVehicleId(vehicleId);
             request.getDetails().setDetailsId(carAddRequest.getDetails().getDetailsId());
             request.getLocation().setLocationId(carAddRequest.getLocation().getLocationId());
