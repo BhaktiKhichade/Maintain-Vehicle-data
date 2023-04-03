@@ -1,6 +1,8 @@
 package org.in.vehicle.controller;
 
 import org.in.vehicle.model.CarAddRequest;
+import org.in.vehicle.service.VehicleService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,15 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/vehicle")
 public class VehicleDataController {
 
-//	private final VehicleService vehicleService;
-//
-//    public VehicleDataController(VehicleService vehicleService) {
-//        this.vehicleService = vehicleService;
-//    }
+	private final VehicleService vehicleService;
+
+    public VehicleDataController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
 
     @PostMapping("/car/add")
     public ResponseEntity<?> addCar(@RequestBody CarAddRequest request){
-        return null;
+    	 try {
+             return ResponseEntity.status(HttpStatus.OK).body(vehicleService.saveCarDetails(request));
+         }catch (Exception e){
+             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getLocalizedMessage());
+         }
     }
 }
-
