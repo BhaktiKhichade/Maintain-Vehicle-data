@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.in.vehicle.mock.VehicleServiceMock.getAddCarDetailsRequest;
 import static org.in.vehicle.mock.VehicleServiceMock.getCarDetails;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.times;
 
 class VehicleServiceImplTest {
 
@@ -47,7 +48,7 @@ class VehicleServiceImplTest {
     @DisplayName("Positive case: fetch car details by vehicle id")
     void getCarDetailsById() throws IOException {
         CarDetails expectedValue = getCarDetails();
-        Mockito.when(vehicleRepository.findById(vehicleId)).thenReturn(Optional.ofNullable(getCarDetails()));
+        Mockito.when(vehicleRepository.findById(Mockito.anyInt())).thenReturn(Optional.ofNullable(getCarDetails()));
         CarDetails actualValue = vehicleService.getCarDetailsById(vehicleId);
         assertEquals(expectedValue,actualValue);
     }
@@ -56,11 +57,18 @@ class VehicleServiceImplTest {
     @DisplayName("Negative case: fetch car details by vehicle id")
     void getCarDetailsByIdNegativeCase(){
         try {
-            Mockito.when(vehicleRepository.findById(vehicleId))
+            Mockito.when(vehicleRepository.findById(Mockito.anyInt()))
                     .thenReturn(Optional.empty());
             vehicleService.getCarDetailsById(vehicleId);
         }catch (InvalidRequestException e){
             assertTrue(true);
         }
+    }
+    @Test
+    @DisplayName("Positive case: delete car details by vehicle id")
+    void deleteCarDetailsById() {
+        Mockito.doNothing().when(vehicleRepository).deleteById(Mockito.anyInt());
+        vehicleService.deleteCarDetailsById(vehicleId);
+        Mockito.verify(vehicleRepository, times(1)).deleteById(vehicleId);
     }
 }
