@@ -32,4 +32,5 @@ public class VehicleServiceMock {
         objectMapper.registerModule(new JavaTimeModule());
         return objectMapper;
     }
+   
 }
