@@ -13,7 +13,7 @@ A very basic Maintain vehicle data application created with Java, Spring Boot, a
 
 > *Importing and Running The Project Through IntelliJ IDEA*
 
-**Step 1:** Click On File > Code > Copy Https URL > Open terminal > change directory where you want save > Paste The Repository Url as: https://github.com/vinayakkamati/maintain-vehicle-data.git > Enter.
+**Step 1:** Click On File > Code > Copy Https URL > Open terminal > change directory where you want save > Paste The Repository Url as: https://github.com/BhaktiKhichade/Maintain-Vehicle-data.git> Enter.
 
 **Step 2:** Open IntelliJ IDEA. [Install, if not already installed]
 
